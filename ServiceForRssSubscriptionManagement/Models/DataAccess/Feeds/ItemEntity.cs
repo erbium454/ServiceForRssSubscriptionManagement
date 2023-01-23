@@ -11,7 +11,7 @@ namespace ServiceForRssSubscriptionManagement.Models.DataAccess.Feeds
         [Required]
         public string Link { get; set; }
         [Required]
-        public string? Description { get; set; }
+        public string Description { get; set; }
         public string? Category { get; set; }
         public string? Comments { get; set; }
         public string? EnclosureUrl { get; set; }
@@ -21,6 +21,7 @@ namespace ServiceForRssSubscriptionManagement.Models.DataAccess.Feeds
         public string? SourceName { get; set; }
         public string? SourceUrl { get; set; }
 
+        [Required]
         public bool IsRead { get; set; } = false;
     }
 }

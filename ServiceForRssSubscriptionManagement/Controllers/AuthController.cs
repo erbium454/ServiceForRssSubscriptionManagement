@@ -27,22 +27,6 @@ namespace ServiceForRssSubscriptionManagement.Controllers
             authDb.Database.EnsureCreated();
         }
 
-        JsonResult GetErrorResult() 
-        {
-            var fields = new Dictionary<string, List<string>>();
-
-            foreach (var fld in ModelState)
-            {
-                foreach (var error in fld.Value.Errors)
-                {
-                    if (!fields.ContainsKey(fld.Key))
-                        fields.Add(fld.Key, new List<string>());
-                    fields[fld.Key].Add(error.ErrorMessage);
-                }
-            }
-            return new JsonResult(fields);
-        }
-
         [HttpPost("register")]
         public async Task<IActionResult> Register(User user)
         {

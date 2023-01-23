@@ -42,12 +42,12 @@ namespace ServiceForRssSubscriptionManagement.Controllers
                     comments = item.Comments,
                     enclosure =
                         !string.IsNullOrWhiteSpace(item.EnclosureUrl) ||
-                        !string.IsNullOrWhiteSpace(item.EnclosureLength != null ? item.EnclosureLength.ToString() : null) ||
+                        !string.IsNullOrWhiteSpace(item.EnclosureLength) ||
                         !string.IsNullOrWhiteSpace(item.EnclosureType) ?
                         new FeedItem.Enclosure
                         {
                             url = item.EnclosureUrl,
-                            length = item.EnclosureLength.ToString(),
+                            length = item.EnclosureLength,
                             type = item.EnclosureType,
                         } : null,
                     guid = item.Id,
