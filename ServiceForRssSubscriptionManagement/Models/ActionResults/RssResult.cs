@@ -48,7 +48,7 @@ namespace ServiceForRssSubscriptionManagement.Models.ActionResults
 
             Response.ContentType = "application/xml; charset=utf-8";
 
-            using XmlWriter writer = XmlWriter.Create(Response.Body, new XmlWriterSettings { Encoding = Encoding.UTF8, Async = true });
+            await using XmlWriter writer = XmlWriter.Create(Response.Body, new XmlWriterSettings { Encoding = Encoding.UTF8, Async = true });
 
             // rss
             await writer.WriteStartElementAsync(null, "rss", null);
@@ -61,9 +61,9 @@ namespace ServiceForRssSubscriptionManagement.Models.ActionResults
                     // item
                     foreach (var item in rssParams.items)
                     {
-                        using var sw = new StrWriter(Encoding.UTF8);
-                        using var item_writer = XmlWriter.Create(sw, new XmlWriterSettings() { Encoding = Encoding.UTF8, Async = true, OmitXmlDeclaration = true });
-                        xmlSer.Serialize(item_writer, item);
+                        await using var sw = new StrWriter(Encoding.UTF8);
+                        await using var item_writer = XmlWriter.Create(sw, new XmlWriterSettings() { Encoding = Encoding.UTF8, Async = true, OmitXmlDeclaration = true });
+                        xmlSer.Serialize(item_writer, item, new XmlSerializerNamespaces(new XmlQualifiedName[] { XmlQualifiedName.Empty }));
                         await writer.WriteRawAsync(sw.ToString());
                     }
                 // channel
